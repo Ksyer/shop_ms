@@ -59,11 +59,11 @@ export default {
     }
   },
   methods: {
-    resetLoginForm () {
+    resetLoginForm() {
       // console.log(this)
       this.$refs.loginFormRef.resetFields()
     },
-    login () {
+    login() {
       this.$refs.loginFormRef.validate(valid => {
         // console.log(valid)
         // 如果为false, 则不发起请求
