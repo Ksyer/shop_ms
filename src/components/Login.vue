@@ -15,7 +15,10 @@
       >
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
+          <el-input
+            v-model="loginForm.username"
+            prefix-icon="iconfont icon-user"
+          ></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
@@ -37,7 +40,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 登录表单数据绑定对象
       loginForm: {
@@ -67,24 +70,20 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         // console.log(valid)
         // 如果为false, 则不发起请求
-        if (!valid) {
-          return false
-        }
-        this.$http
-          .post('/login', this.loginForm)
-          .then(res => {
-            const datas = res.data
-            if (datas.meta.status !== 200) {
-              this.$message.error('登录失败!')
-            } else {
-              this.$message.success('登录成功!')
-              // console.log(datas)
-              // 保存token
-              window.sessionStorage.setItem('token', datas.data.token)
-              // 跳转主页
-              this.$router.push('/home')
-            }
-          })
+        if (!valid) return
+        this.$http.post('/login', this.loginForm).then(res => {
+          const datas = res.data
+          if (datas.meta.status !== 200) {
+            this.$message.error('登录失败!')
+          } else {
+            this.$message.success('登录成功!')
+            // console.log(datas)
+            // 保存token
+            window.sessionStorage.setItem('token', datas.data.token)
+            // 跳转主页
+            this.$router.push('/home')
+          }
+        })
       })
     }
   }
